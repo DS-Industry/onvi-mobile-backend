@@ -1,22 +1,39 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { HhModule } from './hh/hh.module';
-import { AuthModule } from './auth/auth.module';
-import { ClientModule } from './client/client.module';
-import { CardModule } from './card/card.module';
-import { PaymentModule } from './payment/payment.module';
-import { OrderModule } from './order/order.module';
-import { ClientModule } from './client/client.module';
-import { CardModule } from './card/card.module';
-import { ResouecesModule } from './card/resoueces/resoueces.module';
-import { OrderModule } from './order/order.module';
-import { PaymentModule } from './payment/payment.module';
-import { CardModule } from './card/card.module';
+import { AuthModule } from '@auth/auth.module';
+import { ClientModule } from '@client/client.module';
+import { CardModule } from '@card/card.module';
+import { OrderModule } from '@order/order.module';
+import { PaymentModule } from '@payment/payment.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { configuration } from '@config/configuration';
+import { KnexModule } from 'nest-knexjs';
 
 @Module({
-  imports: [HhModule, AuthModule, ClientModule, CardModule, OrderModule, PaymentModule, ResouecesModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: `config/env/.env.${process.env.NODE_ENV}`,
+      load: [configuration],
+      isGlobal: true,
+    }),
+    KnexModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        config: {
+          client: 'oracledb',
+          connection: {
+            user: configService.get<string>('db.username'),
+            password: configService.get<string>('db.password'),
+            connectString: configService.get<string>('db.connectionString'),
+          },
+        },
+      }),
+      inject: [ConfigService],
+    }),
+    AuthModule,
+    ClientModule,
+    CardModule,
+    OrderModule,
+    PaymentModule,
+  ],
 })
 export class AppModule {}
