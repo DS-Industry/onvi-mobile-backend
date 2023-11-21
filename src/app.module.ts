@@ -44,6 +44,7 @@ import * as process from 'process';
                     options: {
                       singleLine: true,
                     },
+                    level: '',
                   },
                 ],
               },
