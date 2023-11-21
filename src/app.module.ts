@@ -9,6 +9,8 @@ import { configuration } from '@config/configuration';
 import { KnexModule } from 'nest-knexjs';
 import { LoggerModule } from 'nestjs-pino';
 import * as process from 'process';
+import { APP_FILTER } from "@nestjs/core";
+import { AllExceptionsFilter } from "./common/filters/exception.filter";
 
 @Module({
   imports: [
@@ -74,6 +76,12 @@ import * as process from 'process';
     CardModule,
     OrderModule,
     PaymentModule,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
   ],
 })
 export class AppModule {}

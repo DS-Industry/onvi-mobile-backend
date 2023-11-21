@@ -1,6 +1,5 @@
-export class Client {
+export class Payment {
 
   constructor() {
   }
-
 }

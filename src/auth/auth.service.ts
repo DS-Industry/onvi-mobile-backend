@@ -1,4 +1,16 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuthService {}
+export class AuthService {
+  constructor() {}
+
+  async findClient() {}
+
+  async createClient() {}
+
+  async singIn() {}
+
+  async reqOtp() {}
+
+  async createRefresh() {}
+}
