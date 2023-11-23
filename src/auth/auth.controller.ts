@@ -10,7 +10,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  @HttpCode(200)
+  @HttpCode(201)
   async register(@Body() data: RegisterClientDto) {
     try {
       return this.authService.createClient();
@@ -18,7 +18,7 @@ export class AuthController {
   }
 
   @Post('login')
-  @HttpCode(200)
+  @HttpCode(201)
   async login(@Body() data: LoginClientDto) {
     try {
       return this.authService.singIn();
@@ -26,7 +26,7 @@ export class AuthController {
   }
 
   @Post('otp')
-  @HttpCode(200)
+  @HttpCode(201)
   async reqOtp(@Body() data: SendOtpDto) {
     try {
       return this.authService.reqOtp();
@@ -34,7 +34,7 @@ export class AuthController {
   }
 
   @Post('refresh')
-  @HttpCode(200)
+  @HttpCode(201)
   async refToken(@Body() data: GetRefreshDto) {
     try {
       return this.authService.createRefresh();

@@ -7,10 +7,12 @@ import {
   IsOptional,
   IsNotEmpty,
   Matches,
+  IsDefined,
 } from 'class-validator';
 
 export class RegisterClientDto {
   @IsString()
+  @IsDefined()
   @IsNotEmpty({ message: 'Phone number is required' })
   @Matches(/^\+?7(9\d{9})$/, {
     message: 'Phone number must be valid',
@@ -18,6 +20,7 @@ export class RegisterClientDto {
   phone: string;
 
   @IsNumberString()
+  @IsDefined()
   @Min(4)
   @Max(4)
   otp: string;

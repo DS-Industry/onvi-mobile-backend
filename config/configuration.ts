@@ -12,4 +12,8 @@ export const configuration = () => ({
     sid: process.env.DB_SID,
     connectionString: process.env.DB_CONNECTION_STRING,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    refresh: process.env.JWT_REFRESH_SECRET,
+  },
 });

@@ -6,6 +6,8 @@ export class AuthService {
 
   async findClient() {}
 
+  async validateClient(phone: string, otp: string) {}
+
   async createClient() {}
 
   async singIn() {}

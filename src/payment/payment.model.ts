@@ -1,5 +1,10 @@
-export class Payment {
+interface IPayProps {
+  paymentToken: string;
+  amount: any; //need to change to custom type
+  capture: boolean;
+  description: string;
+}
 
-  constructor() {
-  }
+export class Payment {
+  constructor() {}
 }
