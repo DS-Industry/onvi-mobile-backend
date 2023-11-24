@@ -10,7 +10,7 @@ export class PaymentController {
   @HttpCode(201)
   async create(@Body() data: CreatePaymentDto) {
     try {
-      return this.paymentService.createPayment();
+      return this.paymentService.create();
     } catch (err) {}
   }
 }

@@ -5,7 +5,7 @@ import { ClientService } from './client.service';
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
   @Get(':phone')
-  async findOne(@Param() phone: string): Promise<any> {
-    return await this.clientService.findOne(phone);
+  async findByPhone(@Param('phone') phone: string): Promise<any> {
+    return await this.clientService.findByPhone(phone);
   }
 }

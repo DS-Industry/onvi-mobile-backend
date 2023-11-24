@@ -23,7 +23,11 @@
       "@client/*": ["src/client/*"],
       "@order/*": ["src/order/*"],
       "@payment/*": ["src/payment/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@interface/*": ["src/common/interface/*"],
+      "@filters/*": ["src/common/filters/*"],
+      "@guards/*": ["src/common/guards/*"],
+      "@interceptors/*": ["src/common/interceptors/*"]
     }
   }
 }

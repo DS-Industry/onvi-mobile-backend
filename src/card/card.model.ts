@@ -15,6 +15,71 @@ interface ICardProps {
   tag?: string;
 }
 
-export class Card {
-  constructor() {}
+export class Card implements ICardProps {
+  airBalance: number;
+  balance: number;
+  cardId: number;
+  cardTypeId: any;
+  clientId: number;
+  cmnCity: number;
+  dateBegin: Date;
+  dateEnd: Date;
+  devNomer: string;
+  isDel: number;
+  isLocked: number;
+  nomer: string;
+  realBalance: number;
+  tag: string;
+
+  private constructor(
+    airBalance: number,
+    balance: number,
+    cardId: number,
+    cardTypeId: any,
+    clientId: number,
+    cmnCity: number,
+    dateBegin: Date,
+    dateEnd: Date,
+    devNomer: string,
+    isDel: number,
+    isLocked: number,
+    nomer: string,
+    realBalance: number,
+    tag: string,
+  ) {
+    this.airBalance = airBalance;
+    this.balance = balance;
+    this.cardId = cardId;
+    this.cardTypeId = cardTypeId;
+    this.clientId = clientId;
+    this.cmnCity = cmnCity;
+    this.dateBegin = dateBegin;
+    this.dateEnd = dateEnd;
+    this.devNomer = devNomer;
+    this.isDel = isDel;
+    this.isLocked = isLocked;
+    this.nomer = nomer;
+    this.realBalance = realBalance;
+    this.tag = tag;
+  }
+
+  public static create(cardData: ICardProps): Card {
+    const card = new Card(
+      cardData.airBalance,
+      cardData.balance,
+      cardData.cardId,
+      cardData.cardTypeId,
+      cardData.clientId,
+      cardData.cmnCity,
+      cardData.dateBegin,
+      cardData.dateEnd,
+      cardData.devNomer,
+      cardData.isDel,
+      cardData.isLocked,
+      cardData.nomer,
+      cardData.realBalance,
+      cardData.tag,
+    );
+    return card;
+  }
 }

@@ -12,7 +12,7 @@ export class OrderController {
   @HttpCode(201)
   async create(@Body() data: CreateOrderDto) {
     try {
-      return this.orderService.createOrder();
+      return this.orderService.create();
     } catch (err) {}
   }
 

@@ -12,11 +12,11 @@ export class CardController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cardService.findOne(+id);
+    return this.cardService.findByPhone(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cardService.remove(+id);
+    return this.cardService.deleteById(+id);
   }
 }

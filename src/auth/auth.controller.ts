@@ -21,7 +21,7 @@ export class AuthController {
   @HttpCode(201)
   async login(@Body() data: LoginClientDto) {
     try {
-      return this.authService.singIn();
+      return this.authService.singIn(data);
     } catch (err) {}
   }
 

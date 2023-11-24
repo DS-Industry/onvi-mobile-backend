@@ -1,18 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nest-knexjs';
 import { Knex } from 'knex';
+import { Client } from '@client/client.model';
 @Injectable()
 export class ClientRepository {
   constructor(@InjectModel() private readonly knex: Knex) {}
 
-  async findOne(phone: string): Promise<any> {
+  async findByPhone(phone: string): Promise<any> {
     try {
       console.log(phone);
       const client = await this.knex
         .table('CRDCLIENT')
-        .where('CORRECT_PHONE', '+79191854846')
+        .where('CORRECT_PHONE', phone)
         .first();
-      return { client };
+      return client;
     } catch (err: any) {
       console.log(err);
     }
