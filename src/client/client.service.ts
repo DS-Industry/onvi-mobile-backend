@@ -7,8 +7,8 @@ import { Client } from '@client/client.model';
 export class ClientService implements IClient {
   constructor(private readonly clientRepository: ClientRepository) {}
 
-  async create(): Promise<Client> {
-    return undefined;
+  async create(dto: any): Promise<any> {
+    return this.clientRepository.create(dto);
   }
 
   async deleteById(): Promise<string> {

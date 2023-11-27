@@ -1,7 +1,7 @@
 import { Client } from '@client/client.model';
 
 export interface IClient {
-  create(): Promise<Client>;
+  create(dto: any): Promise<any>;
   findByPhone(phone: string): Promise<any>;
   deleteById(): Promise<string>;
   updateById(): Promise<Client>;

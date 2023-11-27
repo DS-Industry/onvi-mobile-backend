@@ -64,7 +64,7 @@ export class Card implements ICardProps {
   }
 
   public static create(cardData: ICardProps): Card {
-    const card = new Card(
+    return new Card(
       cardData.airBalance,
       cardData.balance,
       cardData.cardId,
@@ -80,6 +80,5 @@ export class Card implements ICardProps {
       cardData.realBalance,
       cardData.tag,
     );
-    return card;
   }
 }

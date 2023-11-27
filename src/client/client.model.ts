@@ -79,7 +79,6 @@ export class Client implements IClientProps {
     refreshToken: string;
     updDate: Date;
   }): Client {
-    const client = new Client(clientData);
-    return client;
+    return new Client(clientData);
   }
 }
