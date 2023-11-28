@@ -11,15 +11,15 @@ export class ClientService implements IClient {
     return this.clientRepository.create(dto);
   }
 
-  async deleteById(): Promise<string> {
-    return '';
+  async delete(phone: string): Promise<any> {
+    return this.clientRepository.delete(phone);
   }
 
   async findByPhone(phone: string): Promise<any> {
     return this.clientRepository.findByPhone(phone);
   }
 
-  async updateById(): Promise<Client> {
-    return undefined;
+  async updateByPhone(phone: string, dto: any): Promise<any> {
+    return this.clientRepository.updateByPhone(phone, dto);
   }
 }

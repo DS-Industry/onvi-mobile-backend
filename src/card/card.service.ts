@@ -11,15 +11,15 @@ export class CardService implements ICard {
     return this.cardRepository.create(dto);
   }
 
-  async deleteById(id: number): Promise<string> {
-    return '';
+  async delete(dev: string): Promise<any> {
+    return this.cardRepository.delete(dev);
   }
 
   async findByDev(dev: string): Promise<any> {
     return this.cardRepository.findByDev(dev);
   }
 
-  async updateById(): Promise<Card> {
-    return undefined;
+  async updateByDev(dev: string, dto: any): Promise<void> {
+    return this.cardRepository.updateByDev(dev, dto);
   }
 }

@@ -30,4 +30,36 @@ export class CardRepository {
       console.log(err);
     }
   }
+
+  async updateByDev(dev: string, dto: any) {
+    try {
+      return await this.knex('CRDCARD')
+        .where('DEV_NOMER', dev)
+        .update(dto)
+        .then(() => {
+          console.log('Data update successfully');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
+
+  async delete(dev: string) {
+    try {
+      return await this.knex('CRDCARD')
+        .where('DEV_NOMER', dev)
+        .update({ IS_DEL: 1 })
+        .then(() => {
+          console.log('Data update successfully');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
 }

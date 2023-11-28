@@ -33,4 +33,36 @@ export class ClientRepository {
       console.log(err);
     }
   }
+
+  async updateByPhone(phone: string, dto: any) {
+    try {
+      return await this.knex('CRDCLIENT')
+        .where('CORRECT_PHONE', phone)
+        .update(dto)
+        .then(() => {
+          console.log('Data update successfully');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
+
+  async delete(phone: string) {
+    try {
+      return await this.knex('CRDCLIENT')
+        .where('CORRECT_PHONE', phone)
+        .update({ TAG: 'Delete' })
+        .then(() => {
+          console.log('Data update successfully');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
 }

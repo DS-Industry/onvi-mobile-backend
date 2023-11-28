@@ -6,6 +6,7 @@ import {
   HttpCode,
   Post,
   Body,
+  Patch,
 } from '@nestjs/common';
 import { CardService } from '@card/card.service';
 
@@ -25,8 +26,15 @@ export class CardController {
     return await this.cardService.create(dto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cardService.deleteById(+id);
+  @Patch(':dev')
+  @HttpCode(201)
+  async update(@Param('dev') dev: string, @Body() dto: any) {
+    return await this.cardService.updateByDev(dev, dto);
+  }
+
+  @Delete(':dev')
+  @HttpCode(201)
+  async delete(@Param('dev') dev: string) {
+    return await this.cardService.delete(dev);
   }
 }
