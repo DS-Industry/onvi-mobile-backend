@@ -11,25 +11,24 @@ export class Payment implements IPayProps {
   description: string;
   paymentToken: string;
 
-  private constructor(paymentData: {
-    amount: any;
-    capture: boolean;
-    description: string;
-    paymentToken: string;
-  }) {
-    this.amount = paymentData.amount;
-    this.capture = paymentData.capture;
-    this.description = paymentData.description;
-    this.paymentToken = paymentData.paymentToken;
+  private constructor(
+    amount: any,
+    capture: boolean,
+    description: string,
+    paymentToken: string,
+  ) {
+    this.amount = amount;
+    this.capture = capture;
+    this.description = description;
+    this.paymentToken = paymentToken;
   }
 
-  public static create(paymentData: {
-    amount: any;
-    capture: boolean;
-    description: string;
-    paymentToken: string;
-  }): Payment {
-    const payment = new Payment(paymentData);
-    return payment;
+  public static create(paymentData: IPayProps): Payment {
+    return new Payment(
+      paymentData.amount,
+      paymentData.capture,
+      paymentData.description,
+      paymentData.paymentToken,
+    );
   }
 }

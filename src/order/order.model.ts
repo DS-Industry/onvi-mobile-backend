@@ -27,49 +27,48 @@ export class Order implements IOrderProps {
   sum: number;
   transactionId: string;
 
-  private constructor(orderData: {
-    bayNumber: number;
-    carWashId: number;
-    card: any;
-    createdAt: Date;
-    discountAmount: number;
-    excecutionError: string;
-    id: number;
-    orderStatus: any;
-    promoCodeId: number;
-    rewardPointsUsed: number;
-    sum: number;
-    transactionId: string;
-  }) {
-    this.bayNumber = orderData.bayNumber;
-    this.carWashId = orderData.carWashId;
-    this.card = orderData.card;
-    this.createdAt = orderData.createdAt;
-    this.discountAmount = orderData.discountAmount;
-    this.excecutionError = orderData.excecutionError;
-    this.id = orderData.id;
-    this.orderStatus = orderData.orderStatus;
-    this.promoCodeId = orderData.promoCodeId;
-    this.rewardPointsUsed = orderData.rewardPointsUsed;
-    this.sum = orderData.sum;
-    this.transactionId = orderData.transactionId;
+  private constructor(
+    bayNumber: number,
+    carWashId: number,
+    card: any,
+    createdAt: Date,
+    discountAmount: number,
+    excecutionError: string,
+    id: number,
+    orderStatus: any,
+    promoCodeId: number,
+    rewardPointsUsed: number,
+    sum: number,
+    transactionId: string,
+  ) {
+    this.bayNumber = bayNumber;
+    this.carWashId = carWashId;
+    this.card = card;
+    this.createdAt = createdAt;
+    this.discountAmount = discountAmount;
+    this.excecutionError = excecutionError;
+    this.id = id;
+    this.orderStatus = orderStatus;
+    this.promoCodeId = promoCodeId;
+    this.rewardPointsUsed = rewardPointsUsed;
+    this.sum = sum;
+    this.transactionId = transactionId;
   }
 
-  public static create(orderData: {
-    bayNumber: number;
-    carWashId: number;
-    card: any;
-    createdAt: Date;
-    discountAmount: number;
-    excecutionError: string;
-    id: number;
-    orderStatus: any;
-    promoCodeId: number;
-    rewardPointsUsed: number;
-    sum: number;
-    transactionId: string;
-  }): Order {
-    const order = new Order(orderData);
-    return order;
+  public static create(orderData: IOrderProps): Order {
+    return new Order(
+      orderData.bayNumber,
+      orderData.carWashId,
+      orderData.card,
+      orderData.createdAt,
+      orderData.discountAmount,
+      orderData.excecutionError,
+      orderData.id,
+      orderData.orderStatus,
+      orderData.promoCodeId,
+      orderData.rewardPointsUsed,
+      orderData.sum,
+      orderData.transactionId,
+    );
   }
 }

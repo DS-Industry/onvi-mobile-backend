@@ -16,7 +16,7 @@ export class CardController {
 
   @Get(':dev')
   @HttpCode(200)
-  findOne(@Param('dev') dev: string) {
+  findByDev(@Param('dev') dev: string) {
     return this.cardService.findByDev(dev);
   }
 
