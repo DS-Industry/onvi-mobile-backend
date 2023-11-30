@@ -1,63 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nest-knexjs';
 import { Knex } from 'knex';
+import { ICardRepository } from '@interface/ICardRepository';
+import { Card } from '@card/card.model';
 
 @Injectable()
-export class CardRepository {
+export class CardRepository implements ICardRepository {
   constructor(@InjectModel() private readonly knex: Knex) {}
-
-  async findByDev(dev: string): Promise<any> {
+  async create(card: Card): Promise<Card> {
     try {
-      console.log(dev);
-      return await this.knex.table('CRDCARD').where('DEV_NOMER', dev).first();
-    } catch (err: any) {
-      console.log(err);
-    }
-  }
-
-  async create(dto: any): Promise<any> {
-    try {
-      return await this.knex
-        .insert({ dto })
+      const cardData = await this.knex
+        .insert({ card })
         .into('CRDCARD')
-        .then(() => {
-          console.log('Data inserted successfully');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .returning('*');
+      return Card.toEntity(cardData[0]);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
+  async findByDevNumber(dev: string): Promise<Card> {
+    try {
+      const cardData = await this.knex
+        .table('CRDCARD')
+        .where('DEV_NOMER', dev)
+        .first();
+      return Card.toEntity(cardData);
     } catch (err: any) {
       console.log(err);
     }
   }
 
-  async updateByDev(dev: string, dto: any) {
+  async delete(dev: string): Promise<void> {
     try {
-      return await this.knex('CRDCARD')
-        .where('DEV_NOMER', dev)
-        .update(dto)
-        .then(() => {
-          console.log('Data update successfully');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      await this.knex('CRDCARD').where('DEV_NOMER', dev).update({ IS_DEL: 1 });
     } catch (err: any) {
       console.log(err);
     }
   }
 
-  async delete(dev: string) {
+  async update(dev: string, card: Card): Promise<Card> {
     try {
-      return await this.knex('CRDCARD')
+      const cardData = await this.knex('CRDCARD')
         .where('DEV_NOMER', dev)
-        .update({ IS_DEL: 1 })
-        .then(() => {
-          console.log('Data update successfully');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .update(card);
+      return Card.toEntity(cardData[0]);
     } catch (err: any) {
       console.log(err);
     }

@@ -81,4 +81,8 @@ export class Client implements IClientProps {
       clientData.updDate,
     );
   }
+
+  public static toEntity(client: IClientProps): Client {
+    return this.create(client);
+  }
 }

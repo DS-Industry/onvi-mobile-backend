@@ -81,4 +81,8 @@ export class Card implements ICardProps {
       cardData.tag,
     );
   }
+
+  public static toEntity(card: ICardProps): Card {
+    return this.create(card);
+  }
 }

@@ -9,8 +9,8 @@ import { configuration } from '@config/configuration';
 import { KnexModule } from 'nest-knexjs';
 import { LoggerModule } from 'nestjs-pino';
 import * as process from 'process';
-import { APP_FILTER } from "@nestjs/core";
-import { AllExceptionsFilter } from "./common/filters/exception.filter";
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from '@filters/exception.filter';
 
 @Module({
   imports: [

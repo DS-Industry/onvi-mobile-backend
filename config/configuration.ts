@@ -16,5 +16,6 @@ export const configuration = () => ({
     secret: process.env.JWT_SECRET,
     refresh: process.env.JWT_REFRESH_SECRET,
     exp: process.env.JWT_EXP,
+    expDef: process.env.JWT_EXP_DEF,
   },
 });

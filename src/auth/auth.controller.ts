@@ -11,9 +11,9 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(201)
-  async register(@Body() data: RegisterClientDto) {
+  async registration(@Body() data: RegisterClientDto) {
     try {
-      return this.authService.createClient();
+      return this.authService.registration();
     } catch (err) {}
   }
 
@@ -21,7 +21,7 @@ export class AuthController {
   @HttpCode(201)
   async login(@Body() data: LoginClientDto) {
     try {
-      return this.authService.singIn(data);
+      return this.authService.login(data);
     } catch (err) {}
   }
 
@@ -35,9 +35,9 @@ export class AuthController {
 
   @Post('refresh')
   @HttpCode(201)
-  async refToken(@Body() data: GetRefreshDto) {
+  async createRefreshToken(@Body() data: GetRefreshDto) {
     try {
-      return this.authService.createRefresh();
+      return this.authService.createRefreshToken();
     } catch (err) {}
   }
 }

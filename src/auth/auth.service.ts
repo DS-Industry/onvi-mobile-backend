@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { LoginClientDto } from '@auth/dto/login-client.dto';
-import { Tokens } from '@auth/interface/token.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -11,9 +10,9 @@ export class AuthService {
 
   async validateClient(phone: string, otp: string) {}
 
-  async createClient() {}
+  async registration() {}
 
-  async singIn(data: LoginClientDto): Promise<Tokens> {
+  async login(data: LoginClientDto): Promise<any> {
     const accessToken = this.jwtService.sign({});
     const refreshToken = await this.getRefreshToken();
 
@@ -27,5 +26,5 @@ export class AuthService {
 
   async reqOtp() {}
 
-  async createRefresh() {}
+  async createRefreshToken() {}
 }

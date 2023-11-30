@@ -1,66 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nest-knexjs';
 import { Knex } from 'knex';
+import { IClientRepository } from '@interface/IClientRepository';
+import { Client } from '@client/client.model';
 
 @Injectable()
-export class ClientRepository {
+export class ClientRepository implements IClientRepository {
   constructor(@InjectModel() private readonly knex: Knex) {}
-
-  async findByPhone(phone: string): Promise<any> {
+  async create(client: Client): Promise<Client> {
     try {
-      console.log(phone);
-      return await this.knex
+      const clientData = await this.knex
+        .insert({ client })
+        .into('CRDCLIENT')
+        .returning('*');
+      return Client.toEntity(clientData[0]);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
+  async findByPhone(phone: string): Promise<Client> {
+    try {
+      const clientData = await this.knex
         .table('CRDCLIENT')
         .where('CORRECT_PHONE', phone)
         .first();
+      return Client.toEntity(clientData);
     } catch (err: any) {
       console.log(err);
     }
   }
 
-  async create(dto: any): Promise<any> {
+  async delete(phone: string): Promise<void> {
     try {
-      return await this.knex
-        .insert({ dto })
-        .into('CRDCLIENT')
-        .then(() => {
-          console.log('Data inserted successfully');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err: any) {
-      console.log(err);
-    }
-  }
-
-  async updateByPhone(phone: string, dto: any) {
-    try {
-      return await this.knex('CRDCLIENT')
+      await this.knex('CRDCLIENT')
         .where('CORRECT_PHONE', phone)
-        .update(dto)
-        .then(() => {
-          console.log('Data update successfully');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .update({ TAG: 'Delete' });
     } catch (err: any) {
       console.log(err);
     }
   }
 
-  async delete(phone: string) {
+  async update(phone: string, updateClient: Client): Promise<Client> {
     try {
-      return await this.knex('CRDCLIENT')
+      const clientData = await this.knex('CRDCLIENT')
         .where('CORRECT_PHONE', phone)
-        .update({ TAG: 'Delete' })
-        .then(() => {
-          console.log('Data update successfully');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .update(updateClient)
+        .returning('*');
+      return Client.toEntity(clientData[0]);
     } catch (err: any) {
       console.log(err);
     }
