@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
+import { Card } from '@card/card.model';
+import { CardRepository } from '@card/card.repository';
 
 @Injectable()
 export class CardService {
-  create(createCardDto: CreateCardDto) {
-    return 'This action adds a new card';
+  constructor(private readonly cardRepository: CardRepository) {}
+
+  async create(dto: any): Promise<Card> {
+    const card = await this.cardRepository.findByDevNumber(dto.devNumber);
+    if (!card) {
+      return this.cardRepository.create(Card.create(dto));
+    }
+    throw new Error('Error');
+  }
+  async findByDevNumber(dev: string): Promise<Card> {
+    const card = await this.cardRepository.findByDevNumber(dev);
+    if (card) {
+      return card;
+    }
+    throw new Error('Error');
+  }
+  async delete(dev: string): Promise<void> {
+    const card = await this.cardRepository.findByDevNumber(dev);
+    if (card) {
+      return this.cardRepository.delete(dev);
+    }
+    throw new Error('Error');
   }
 
-  findAll() {
-    return `This action returns all card`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} card`;
-  }
-
-  update(id: number, updateCardDto: UpdateCardDto) {
-    return `This action updates a #${id} card`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} card`;
+  async update(dev: string, dto: any): Promise<Card> {
+    const card = await this.cardRepository.findByDevNumber(dev);
+    if (card) {
+      return this.cardRepository.update(dev, Card.create(dto));
+    }
+    throw new Error('Error');
   }
 }
